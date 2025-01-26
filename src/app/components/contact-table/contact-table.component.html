@@ -1,1 +1,23 @@
-<p>contact-table works!</p>
+<table class="table table-bordered">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Contact Number</th>
+        <th scope="col">Email Address</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        @for(data of dataSource; track data.id) {
+            <tr>
+                <td><a [routerLink]="['./', data.id]" class="text-dark">{{data.name}}</a></td>
+                <td>{{data.contactNumber}}</td>
+                <td>{{data.emailAddress}}</td>
+                <td>
+                    <button class="btn btn-sm mx-2"><mat-icon>edit</mat-icon></button>
+                    <button class="btn btn-sm mx-2 me-0"><mat-icon>delete</mat-icon></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+  </table>

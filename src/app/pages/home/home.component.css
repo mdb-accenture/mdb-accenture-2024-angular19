@@ -1,0 +1,6 @@
+p {
+    max-width: 480px;
+}
+button[mat-flat-button] {
+    background: #B200FF;
+}

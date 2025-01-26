@@ -1,0 +1,10 @@
+mat-card {
+    background: transparent;
+}
+mat-card:hover {
+    background: white;
+}
+mat-card-footer {
+    right: 5px;
+    z-index: 999;
+}

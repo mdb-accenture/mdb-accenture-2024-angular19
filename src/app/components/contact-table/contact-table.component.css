@@ -1,0 +1,17 @@
+table th {
+    background: #4E0078;
+    color: white;
+}
+table th:last-child {
+    width: 95px;
+    max-width: 150px;
+    text-align: center;
+}
+table button {
+    width: 24px;
+    height: 24px;
+}
+table mat-icon {
+    font-size: 18px;
+    margin-left: -8px;
+}
