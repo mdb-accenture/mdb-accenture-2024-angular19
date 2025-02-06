@@ -1,8 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Contact, ContactMock, IContact, IContactAction } from '../../models/contact';
+import { ContactService } from '../../services/contact.service';
 import { ContactCardsComponent } from "../../components/contact-cards/contact-cards.component";
 import { ContactTableComponent } from "../../components/contact-table/contact-table.component";
 import { ContactFormComponent } from "../../components/contact-form/contact-form.component";
@@ -13,12 +14,18 @@ import { ContactFormComponent } from "../../components/contact-form/contact-form
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   cardView: boolean = true;
   contact: IContact = new Contact();
-  contacts: IContact[] = ContactMock;
+  contacts: IContact[] = [];
 
   @ViewChild('contactModal') contactModal!: ElementRef;
+
+  constructor(private ContactService: ContactService) {}
+
+  ngOnInit(): void {
+    this.getAllContacts();
+  }
 
   setCardView = (_val: boolean) => {
     this.cardView = _val;
@@ -36,6 +43,10 @@ export class HomeComponent {
     }
   }
 
+  getAllContacts() {
+    this.contacts = this.ContactService.getAllContacts();
+  }
+
   addContact() {
     this.contact = new Contact();
     this.openModal();
@@ -46,28 +57,29 @@ export class HomeComponent {
     this.openModal();
   }
 
-  deleteContact(_id: number | string) {
-    this.contacts = this.contacts.filter(c => {return c.id !== _id});
-  }
-
   action(_event: IContactAction) {
     switch(_event.action) {
       case 'edit':
-        if(_event.contact) this.updateContact(_event.contact.id);
+        if(_event.contact) 
+          this.updateContact(_event.contact.id);
       break;
       case 'delete':
-        if(_event.contact) this.deleteContact(_event.contact.id);
+        if(_event.contact) {
+          if(this.ContactService.deleteContact(_event.contact))
+            this.getAllContacts();
+        }
       break;
       case 'formClose':
         this.closeModal();
       break;
       case 'formSubmit':
         if(this.contact.id === 0) {
-          this.contact.id = Number(this.contacts[this.contacts.length -1].id) + 1;
-          this.contacts.push(this.contact);
+          if(this.ContactService.addContact(this.contact))
+          this.getAllContacts();
         }
         else {
-          this.contacts = this.contacts.map(c => {return c.id === this.contact.id ? this.contact : c});
+          if(this.ContactService.updateContact(this.contact))
+          this.getAllContacts();
         }
         this.closeModal();
       break;
