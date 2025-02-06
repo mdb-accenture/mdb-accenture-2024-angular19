@@ -6,22 +6,35 @@
     <p>Your list of contacts appear here. To add a new contact, click on the Add New Contact Button.</p>
 
     <!-- Button -->
-    <button mat-flat-button class="ms-auto">Add New Contact</button>
+    <button mat-flat-button class="ms-auto" (click)="addContact()">Add New Contact</button>
 </div>
 
 <!-- View Toolbar -->
 <mat-toolbar class="px-0 bg-transparent justify-content-end">
-    <button mat-icon-button [disabled]="cardView" (click) = "setCardView(true)">
+    <button mat-icon-button [disabled]="cardView" (click)="setCardView(true)">
         <mat-icon>grid_view</mat-icon>
     </button>
-    <button mat-icon-button [disabled]="!cardView" (click) = "setCardView(false)">
+    <button mat-icon-button [disabled]="!cardView" (click)="setCardView(false)">
         <mat-icon>menu</mat-icon>
     </button>
 </mat-toolbar>
 
 <!-- Contacts -->
 @if(cardView) {
-    <app-contact-cards></app-contact-cards>
+    <app-contact-cards [dataSource]="contacts" (action)="action($event)"></app-contact-cards>
 } @else {
-    <app-contact-table></app-contact-table>
+    <app-contact-table [dataSource]="contacts" (action)="action($event)"></app-contact-table>
 }
+
+<div #contactModal style="display: none;">
+    <div class="modal show d-block" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              <app-contact-form [contact]="contact" (action)="action($event)"></app-contact-form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+</div>

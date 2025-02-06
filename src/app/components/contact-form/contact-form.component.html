@@ -1,0 +1,39 @@
+<form class="p-3" (submit)="formSubmit()" #formValue="ngForm">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" [(ngModel)]="contact.name" #name="ngModel" name="name" class="form-control" placeholder="Fullname" required>
+        @if(name.touched) {
+            @if(name.errors?.['required']) {
+                <div class="invalid-feedback d-block">Please enter a name.</div>
+            }
+        }
+    </div>
+    <div class="mb-3">
+        <label for="contactNumber" class="form-label">Contact Number</label>
+        <input type="text" [ngModel]="contact.contactNumber | mask:'####-###-####'" (ngModelChange)="contact.contactNumber = $event" #contactNumber="ngModel" name="contactNumber" class="form-control" placeholder="0999-999-9999" minlength="13" maxlength="13" required>
+        @if(contactNumber.touched) {
+            @if(contactNumber.errors?.['required']) {
+                <div class="invalid-feedback d-block">Please enter a contact number.</div>
+            }
+            @if(contactNumber.errors?.['minlength'] || contactNumber.errors?.['maxlength']) {
+                <div class="invalid-feedback d-block">Number must be 11 digits.</div>
+            }
+        }
+    </div>
+    <div class="mb-3">
+        <label for="emailAddress" class="form-label">Email address</label>
+        <input type="email" [(ngModel)]="contact.emailAddress" #emailAddress="ngModel" name="emailAddress" class="form-control" placeholder="name@example.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+        @if(emailAddress.touched) {
+            @if(emailAddress.errors?.['required']) {
+                <div class="invalid-feedback d-block">Please enter an email address.</div>
+            }
+            @if(emailAddress.errors?.['pattern']) {
+                <div class="invalid-feedback d-block">Please enter a valid email address.</div>
+            }
+        }
+    </div>
+    <div class="mt-4 d-flex">
+        <button class="btn border border-primary rounded-pill px-3" type="button" (click)="formClose()">Cancel</button>
+        <button class="btn btn-primary rounded-pill ms-auto px-3" type="submit" [disabled]="formValue.invalid">{{contact.id ? 'Save Changes' : 'Add Contact'}}</button>
+    </div>
+</form>
