@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ContactMock, IContact } from '../../../model/contact';
+import { IContact, IContactAction } from '../../models/contact';
 
 @Component({
   selector: 'app-contact-cards',
@@ -13,5 +13,14 @@ import { ContactMock, IContact } from '../../../model/contact';
   styleUrl: './contact-cards.component.css'
 })
 export class ContactCardsComponent {
-  dataSource: IContact[] = ContactMock;
+  @Input() dataSource: IContact[] = [];
+  @Output() action = new EventEmitter<IContactAction>();
+
+  edit(_contact: IContact): void {
+    this.action.emit({contact: _contact, action: 'edit'});
+  }
+
+  delete(_contact: IContact): void {
+    this.action.emit({contact: _contact, action: 'delete'});
+  }
 }

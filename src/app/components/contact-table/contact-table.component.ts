@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { ContactMock, IContact } from '../../../model/contact';
+import { IContact, IContactAction } from '../../models/contact';
 
 @Component({
   selector: 'app-contact-table',
@@ -10,6 +10,14 @@ import { ContactMock, IContact } from '../../../model/contact';
   styleUrl: './contact-table.component.css'
 })
 export class ContactTableComponent {
-  displayedColumns: string[] = ['name', 'contactNumber', 'emailAddress'];
-  dataSource: IContact[] = ContactMock;
+  @Input() dataSource: IContact[] = [];
+  @Output() action = new EventEmitter<IContactAction>();
+
+  edit(_contact: IContact): void {
+    this.action.emit({contact: _contact, action: 'edit'});
+  }
+
+  delete(_contact: IContact): void {
+    this.action.emit({contact: _contact, action: 'delete'});
+  }
 }

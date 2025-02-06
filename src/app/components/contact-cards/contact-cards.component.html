@@ -4,19 +4,19 @@
         <div class="col-md-6 col-lg-4">
             <mat-card appearance="outlined" class="mb-3">
                 <mat-card-header>
-                    <a [routerLink]="['./', data.id]" class="stretched-link text-decoration-none text-dark fs-4"><b>{{data.name}}</b></a>
+                    <a [routerLink]="['./', data.id]" class="stretched-link text-decoration-none text-dark text-trunctate fs-4"><b>{{data.name}}</b></a>
                 </mat-card-header>
                 <mat-card-content class="pb-3">
-                    <div>{{data.emailAddress}}</div>
-                    <div>{{data.contactNumber}}</div>
+                    <div class="text-truncate">{{data.emailAddress}}</div>
+                    <div class="text-truncate">{{data.contactNumber}}</div>
                 </mat-card-content>
                 <!-- Actions -->
                 <mat-card-footer class="position-absolute">
                     <mat-toolbar class="px-0 bg-transparent justify-content-end">
-                        <button mat-icon-button>
+                        <button mat-icon-button (click)="edit(data)">
                             <mat-icon>edit_outline</mat-icon>
                         </button>
-                        <button mat-icon-button>
+                        <button mat-icon-button (click)="delete(data)">
                             <mat-icon>delete_outline</mat-icon>
                         </button>
                     </mat-toolbar>
