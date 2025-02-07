@@ -7,10 +7,11 @@ import { ContactService } from '../../services/contact.service';
 import { ContactCardsComponent } from "../../components/contact-cards/contact-cards.component";
 import { ContactTableComponent } from "../../components/contact-table/contact-table.component";
 import { ContactFormComponent } from "../../components/contact-form/contact-form.component";
+import { ContainerModalComponent } from "../../components/container-modal/container-modal.component";
 
 @Component({
   selector: 'app-home',
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, ContactCardsComponent, ContactTableComponent, ContactFormComponent],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, ContainerModalComponent, ContactCardsComponent, ContactTableComponent, ContactFormComponent, ContainerModalComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -23,36 +24,34 @@ export class HomeComponent implements OnInit {
 
   constructor(private ContactService: ContactService) {}
 
-  ngOnInit(): void {
-    this.getAllContacts();
+  ngOnInit(): void { 
+    this.getAllContacts(); 
   }
 
-  setCardView = (_val: boolean) => {
-    this.cardView = _val;
+  setCardView(_val: boolean) { 
+    this.cardView = _val; 
   }
 
-  openModal() {
-    if(this.contactModal) {
-      this.contactModal.nativeElement.style.display = "block";
-    }
+  openModal() { 
+    if(this.contactModal) 
+      this.contactModal.nativeElement.style.display = "block"; 
   }
 
-  closeModal() {
-    if(this.contactModal) {
-      this.contactModal.nativeElement.style.display = "none";
-    }
+  closeModal() { 
+    if(this.contactModal) 
+      this.contactModal.nativeElement.style.display = "none"; 
   }
 
-  getAllContacts() {
-    this.contacts = this.ContactService.getAllContacts();
+  getAllContacts() { 
+    this.contacts = this.ContactService.getAllContacts(); 
   }
 
-  addContact() {
-    this.contact = new Contact();
-    this.openModal();
+  addContact() { 
+    this.contact = new Contact(); 
+    this.openModal(); 
   }
 
-  updateContact(_id: number | string) {
+  updateContact(_id: number | string) { 
     this.contact = structuredClone(this.contacts.find(c => c.id === _id)) || new Contact();
     this.openModal();
   }

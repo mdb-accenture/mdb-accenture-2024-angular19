@@ -19,22 +19,16 @@
     </button>
 </mat-toolbar>
 
-<!-- Contacts -->
+<!-- View Contacts -->
 @if(cardView) {
     <app-contact-cards [dataSource]="contacts" (action)="action($event)"></app-contact-cards>
 } @else {
     <app-contact-table [dataSource]="contacts" (action)="action($event)"></app-contact-table>
 }
 
+<!-- Modal -->
 <div #contactModal style="display: none;">
-    <div class="modal show d-block" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-body">
-              <app-contact-form [contact]="contact" (action)="action($event)"></app-contact-form>
-            </div>
-          </div>
-        </div>
-    </div>
-    <div class="modal-backdrop fade show"></div>
+    <app-container-modal>
+        <app-contact-form [contact]="contact" (action)="action($event)"></app-contact-form>
+    </app-container-modal>
 </div>
