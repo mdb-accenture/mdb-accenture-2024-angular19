@@ -1,23 +1,25 @@
-<table class="table table-bordered">
-  <thead class="table-primary">
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Contact Number</th>
-      <th scope="col">Email Address</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-      @for(data of dataSource; track data.id) {
-          <tr>
-              <td><a [routerLink]="['./', data.id]" class="text-dark">{{data.name}}</a></td>
-              <td>{{data.contactNumber}}</td>
-              <td>{{data.emailAddress}}</td>
-              <td>
-                  <button class="btn btn-sm mx-2 rounded-circle" (click)="edit(data)"><mat-icon>edit_outline</mat-icon></button>
-                  <button class="btn btn-sm mx-2 rounded-circle me-0" (click)="delete(data)"><mat-icon>delete_outline</mat-icon></button>
-              </td>
-          </tr>
-      }
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-bordered align-middle text-nowrap">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Contact Number</th>
+        <th scope="col">Email Address</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        @for(data of dataSource; track data.id) {
+            <tr>
+                <td><a [routerLink]="['./', data.id]" class="text-dark">{{data.name}}</a></td>
+                <td>{{data.contactNumber}}</td>
+                <td>{{data.emailAddress}}</td>
+                <td>
+                    <button class="btn btn-sm mx-2 rounded-circle" (click)="edit(data)"><mat-icon>edit_outline</mat-icon></button>
+                    <button class="btn btn-sm mx-2 rounded-circle me-0" (click)="delete(data)"><mat-icon>delete_outline</mat-icon></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+  </table>
+</div>
