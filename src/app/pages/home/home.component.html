@@ -11,10 +11,10 @@
 
 <!-- View Toolbar -->
 <mat-toolbar class="px-0 bg-transparent justify-content-end">
-    <button mat-icon-button [disabled]="cardView" (click)="setCardView(true)">
+    <button mat-icon-button [class.active]="cardView" [disabled]="cardView" (click)="setCardView(true)">
         <mat-icon>grid_view</mat-icon>
     </button>
-    <button mat-icon-button [disabled]="!cardView" (click)="setCardView(false)">
+    <button mat-icon-button [class.active]="!cardView" [disabled]="!cardView" (click)="setCardView(false)">
         <mat-icon>menu</mat-icon>
     </button>
 </mat-toolbar>

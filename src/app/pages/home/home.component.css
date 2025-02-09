@@ -4,3 +4,9 @@ p {
 button[mat-flat-button] {
     background: #B200FF;
 }
+[mat-icon-button] mat-icon {
+    color: var(--mdc-icon-button-disabled-icon-color, color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent))!important;
+}
+[mat-icon-button].active mat-icon {
+    color: var(--mdc-icon-button-icon-color, var(--mat-sys-on-surface-variant))!important;
+}
