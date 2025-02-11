@@ -14,7 +14,7 @@ export interface ToastAction {
 })
 export class UiToastComponent {
   @Input() timeout: number = 3000;
-  @Input() action: ToastAction = {type: 'success', message: 'Success!'};
+  action: ToastAction = {type: 'success', message: 'Success!'};
 
   @ViewChild('toast') toast!: ElementRef;
 
