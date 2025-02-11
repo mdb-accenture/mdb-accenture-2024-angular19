@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { IContact, IContactAction } from '../../models/contact';
+import { IContact } from '../../../models/contact';
 
 @Component({
   selector: 'app-contact-cards',
@@ -14,13 +14,9 @@ import { IContact, IContactAction } from '../../models/contact';
 })
 export class ContactCardsComponent {
   @Input() dataSource: IContact[] = [];
-  @Output() action = new EventEmitter<IContactAction>();
+  @Output() edit = new EventEmitter<IContact>();
+  @Output() delete = new EventEmitter<IContact>();
 
-  edit(_contact: IContact): void {
-    this.action.emit({contact: _contact, action: 'edit'});
-  }
-
-  delete(_contact: IContact): void {
-    this.action.emit({contact: _contact, action: 'delete'});
-  }
+  onEdit = (_contact: IContact): void => this.edit.emit(_contact);
+  onDelete = (_contact: IContact): void => this.delete.emit(_contact);
 }

@@ -15,8 +15,8 @@
                 <td>{{data.contactNumber}}</td>
                 <td>{{data.emailAddress}}</td>
                 <td>
-                    <button class="btn btn-sm mx-2 rounded-circle" (click)="edit(data)"><mat-icon>edit_outline</mat-icon></button>
-                    <button class="btn btn-sm mx-2 rounded-circle me-0" (click)="delete(data)"><mat-icon>delete_outline</mat-icon></button>
+                    <button class="btn btn-sm mx-2 rounded-circle" (click)="onEdit(data)"><mat-icon>edit_outline</mat-icon></button>
+                    <button class="btn btn-sm mx-2 rounded-circle me-0" (click)="onDelete(data)"><mat-icon>delete_outline</mat-icon></button>
                 </td>
             </tr>
         }

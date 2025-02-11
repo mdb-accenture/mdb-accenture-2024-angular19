@@ -17,6 +17,12 @@ export class Contact<IContact> {
     emailAddress: string = "";
 }
 
+export enum ContactError {
+  Add = "Failed to Add Contact! Please contact admin.",
+  Update = "Failed to Edit Contact! Please contact admin.",
+  Delete = "Failed to Delete Contact! Please contact admin."
+}
+
 export const ContactMock: IContact[] = [
     { id: 1, name: "Mark Bandilla", contactNumber: "0905-777-8910", emailAddress: "fake_email@gmail.com" },
     { id: 2, name: "Jay Contreras", contactNumber: "0917-123-4567", emailAddress: "kamikazeegod@gmail.com" },

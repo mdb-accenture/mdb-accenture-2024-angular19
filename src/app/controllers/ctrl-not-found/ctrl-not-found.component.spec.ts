@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotFoundComponent } from './not-found.component';
+import { CtrlNotFoundComponent } from './ctrl-not-found.component';
 
-describe('NotFoundComponent', () => {
-  let component: NotFoundComponent;
-  let fixture: ComponentFixture<NotFoundComponent>;
+describe('CtrlNotFoundComponent', () => {
+  let component: CtrlNotFoundComponent;
+  let fixture: ComponentFixture<CtrlNotFoundComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NotFoundComponent]
+      imports: [CtrlNotFoundComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NotFoundComponent);
+    fixture = TestBed.createComponent(CtrlNotFoundComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,4 +1,4 @@
-<form class="p-3" (submit)="formSubmit()" #formValue="ngForm">
+<form class="p-3" (submit)="onSubmit()" #formValue="ngForm">
     <div class="mb-3">
         <label for="name" class="form-label">Name</label>
         <input type="text" [(ngModel)]="contact.name" #name="ngModel" name="name" class="form-control" placeholder="Fullname" required>
@@ -33,7 +33,7 @@
         }
     </div>
     <div class="mt-4 d-flex">
-        <button class="btn border border-primary rounded-pill px-3" type="button" (click)="formClose()">Cancel</button>
+        <button class="btn border border-primary rounded-pill px-3" type="button" (click)="onClose()">Cancel</button>
         <button class="btn btn-primary rounded-pill ms-auto px-3" type="submit" [disabled]="formValue.invalid">{{contact.id ? 'Save Changes' : 'Add Contact'}}</button>
     </div>
 </form>

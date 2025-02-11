@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContainerModalComponent } from './container-modal.component';
+import { CtrlContactComponent } from './ctrl-contact.component';
 
-describe('ContainerModalComponent', () => {
-  let component: ContainerModalComponent;
-  let fixture: ComponentFixture<ContainerModalComponent>;
+describe('CtrlContactComponent', () => {
+  let component: CtrlContactComponent;
+  let fixture: ComponentFixture<CtrlContactComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ContainerModalComponent]
+      imports: [CtrlContactComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ContainerModalComponent);
+    fixture = TestBed.createComponent(CtrlContactComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { Contact, IContact, IContactAction } from '../../models/contact';
+import { IContact } from '../../../models/contact';
 import { FormsModule } from '@angular/forms';
-import { MaskPipe } from '../../pipes/mask.pipe';
+import { MaskPipe } from '../../../pipes/mask.pipe';
 
 @Component({
   selector: 'app-contact-form',
@@ -12,12 +12,8 @@ import { MaskPipe } from '../../pipes/mask.pipe';
 })
 export class ContactFormComponent {
   @Input() contact!: IContact;
-  @Output() action = new EventEmitter<IContactAction>();
+  @Output() action = new EventEmitter<string>();
 
-  formClose() {
-    this.action.emit({action: 'formClose'});
-  }
-  formSubmit() {
-    this.action.emit({action: 'formSubmit'});
-  }
+  onClose = () => this.action.emit('close');
+  onSubmit = () => this.action.emit('submit');
 }

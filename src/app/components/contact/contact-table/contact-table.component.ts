@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { IContact, IContactAction } from '../../models/contact';
+import { IContact } from '../../../models/contact';
 
 @Component({
   selector: 'app-contact-table',
@@ -11,13 +11,9 @@ import { IContact, IContactAction } from '../../models/contact';
 })
 export class ContactTableComponent {
   @Input() dataSource: IContact[] = [];
-  @Output() action = new EventEmitter<IContactAction>();
+  @Output() edit = new EventEmitter<IContact>();
+  @Output() delete = new EventEmitter<IContact>();
 
-  edit(_contact: IContact): void {
-    this.action.emit({contact: _contact, action: 'edit'});
-  }
-
-  delete(_contact: IContact): void {
-    this.action.emit({contact: _contact, action: 'delete'});
-  }
+  onEdit = (_contact: IContact): void => this.edit.emit(_contact);
+  onDelete = (_contact: IContact): void => this.delete.emit(_contact);
 }

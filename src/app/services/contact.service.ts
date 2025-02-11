@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ContactMock, IContact } from '../models/contact';
-
-enum ContactError {
-  Add = "Failed to Add Contact! Please contact admin.",
-  Update = "Failed to Edit Contact! Please contact admin.",
-  Delete = "Failed to Delete Contact! Please contact admin."
-}
+import { ContactError, ContactMock, IContact } from '../models/contact';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +15,12 @@ export class ContactService {
     return this.contacts;
   }
 
+  getContactById(_id: number | string) {
+    return this.contacts.find(c => c.id == _id);
+  }
+
   addContact(_contact: IContact):boolean {
     try {
-      _contact.id = Number(this.contacts[this.contacts.length -1].id) + 1;
       this.contacts.push(_contact);
       return true;
     } catch(error) {

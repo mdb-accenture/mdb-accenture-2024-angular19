@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { ContactDetailComponent } from './components/contact-detail/contact-detail.component';
+import { CtrlContactComponent } from './controllers/ctrl-contact/ctrl-contact/ctrl-contact.component';
+import { CtrlContactDetailsComponent } from './controllers/ctrl-contact/ctrl-contact-details/ctrl-contact-details.component';
+import { CtrlNotFoundComponent } from './controllers/ctrl-not-found/ctrl-not-found.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
-    { path: 'home/:id', component: ContactDetailComponent },
-    { path: 'not-found', component: NotFoundComponent},
+    { path: 'home', component: CtrlContactComponent },
+    { path: 'home/:id', component: CtrlContactDetailsComponent },
+    { path: 'not-found', component: CtrlNotFoundComponent},
     { path: '**', redirectTo: 'not-found'}
 ];
