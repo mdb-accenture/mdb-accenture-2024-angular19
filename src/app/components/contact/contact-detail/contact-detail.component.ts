@@ -11,6 +11,5 @@ import { IContact } from '../../../models/contact';
   styleUrl: './contact-detail.component.css'
 })
 export class ContactDetailComponent {
-  @Input() data: IContact | undefined;
-  contact!: IContact | undefined;
+  @Input() contact: IContact | undefined;
 }

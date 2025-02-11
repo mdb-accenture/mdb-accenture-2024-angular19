@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContactService } from '../../../services/contact.service';
 import { MatIconModule } from '@angular/material/icon';
 import { ContactDetailComponent } from "../../../components/contact/contact-detail/contact-detail.component";
@@ -7,7 +7,7 @@ import { IContact } from '../../../models/contact';
 
 @Component({
   selector: 'app-ctrl-contact-details',
-  imports: [MatIconModule, ContactDetailComponent],
+  imports: [MatIconModule, ContactDetailComponent, RouterLink],
   templateUrl: './ctrl-contact-details.component.html',
   styleUrl: './ctrl-contact-details.component.css'
 })
