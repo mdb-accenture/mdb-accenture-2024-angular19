@@ -1,0 +1,6 @@
+.toast {
+    background: #43F7CC;
+}
+.toast.fail {
+    background: #F74A4D;
+}

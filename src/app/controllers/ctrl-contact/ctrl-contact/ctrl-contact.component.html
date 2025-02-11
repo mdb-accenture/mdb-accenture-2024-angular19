@@ -10,10 +10,10 @@
 
 <!-- View Toolbar -->
 <mat-toolbar class="px-0 bg-transparent justify-content-end">
-    <button mat-icon-button [class.active]="cardView" [disabled]="cardView" (click)="onSetCardView(true)">
+    <button mat-icon-button [class.active]="cardView" [disabled]="cardView" (click)="cardView = true">
         <mat-icon>grid_view</mat-icon>
     </button>
-    <button mat-icon-button [class.active]="!cardView" [disabled]="!cardView" (click)="onSetCardView(false)">
+    <button mat-icon-button [class.active]="!cardView" [disabled]="!cardView" (click)="cardView = false">
         <mat-icon>menu</mat-icon>
     </button>
 </mat-toolbar>
@@ -26,8 +26,9 @@
 }
 
 <!-- Modal -->
-<div #contactModal style="display: none;">
-    <app-ui-modal>
-        <app-contact-form [contact]="contact" (action)="onAction($event)"></app-contact-form>
-    </app-ui-modal>
-</div>
+<app-ui-modal [show]="modalShow">
+    <app-contact-form [contact]="contact" (action)="onAction($event)"></app-contact-form>
+</app-ui-modal>
+
+<!-- Toast -->
+<app-ui-toast></app-ui-toast>

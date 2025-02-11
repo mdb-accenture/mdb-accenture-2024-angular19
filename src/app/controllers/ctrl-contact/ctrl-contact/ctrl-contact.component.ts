@@ -8,38 +8,27 @@ import { ContactCardsComponent } from "../../../components/contact/contact-cards
 import { ContactTableComponent } from "../../../components/contact/contact-table/contact-table.component";
 import { ContactFormComponent } from "../../../components/contact/contact-form/contact-form.component";
 import { UiModalComponent } from "../../../components/ui/ui-modal/ui-modal.component";
+import { UiToastComponent } from "../../../components/ui/ui-toast/ui-toast.component";
 
 @Component({
   selector: 'app-ctrl-contact',
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, UiModalComponent, ContactCardsComponent, ContactTableComponent, ContactFormComponent],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, UiModalComponent, ContactCardsComponent, ContactTableComponent, ContactFormComponent, UiToastComponent],
   templateUrl: './ctrl-contact.component.html',
   styleUrl: './ctrl-contact.component.css'
 })
 export class CtrlContactComponent implements OnInit {
   cardView: boolean = true;
+  modalShow: boolean = false;
+  
   contact: IContact = new Contact();
   contacts: IContact[] = [];
 
-  @ViewChild('contactModal') contactModal!: ElementRef;
+  @ViewChild(UiToastComponent) toast!: UiToastComponent;
 
   constructor(private ContactService: ContactService) {}
 
   ngOnInit(): void { 
     this.getAllContacts(); 
-  }
-
-  onSetCardView(_val: boolean) { 
-    this.cardView = _val; 
-  }
-
-  openModal() { 
-    if(this.contactModal) 
-      this.contactModal.nativeElement.style.display = "block"; 
-  }
-
-  closeModal() { 
-    if(this.contactModal) 
-      this.contactModal.nativeElement.style.display = "none"; 
   }
 
   getAllContacts() { 
@@ -48,12 +37,12 @@ export class CtrlContactComponent implements OnInit {
 
   onAdd() { 
     this.contact = new Contact(); 
-    this.openModal(); 
+    this.modalShow = true; 
   }
 
   onEdit(_contact: IContact) { 
     this.contact = structuredClone(this.contacts.find(c => c.id === _contact.id)) || new Contact();
-    this.openModal();
+    this.modalShow = true;
   }
 
   onDelete(_contact: IContact) {
@@ -61,27 +50,38 @@ export class CtrlContactComponent implements OnInit {
     this.onAction('delete');
   }
 
-
   onAction(_event: string) {
     switch(_event) {
       case 'close':
-        this.closeModal();
+        this.modalShow = false;
       break;
       case 'submit':
         if(this.contact.id === 0) {
           this.contact.id = Number(this.contacts[this.contacts.length -1].id) + 1;
-          if(this.ContactService.addContact(this.contact))
-          this.getAllContacts();
+          if(this.ContactService.addContact(this.contact)) {
+            this.getAllContacts();
+            this.toast.show({type: 'success', message: 'Successfully added a new contact!'});
+          } else {
+            this.toast.show({type: 'fail', message: 'Failed adding a new contact!'});
+          }
         }
         else {
-          if(this.ContactService.updateContact(this.contact))
-          this.getAllContacts();
+          if(this.ContactService.updateContact(this.contact)) {
+            this.getAllContacts();
+            this.toast.show({type: 'success', message: 'Changes saved!'});
+          } else {
+            this.toast.show({type: 'fail', message: 'Failed saving changes!'});
+          }
         }
-        this.closeModal();
+        this.modalShow = false;
       break;
       case 'delete':
-        if(this.ContactService.deleteContact(this.contact))
+        if(this.ContactService.deleteContact(this.contact)) {
           this.getAllContacts();
+          this.toast.show({type: 'success', message: 'Contact deleted!'});
+        } else {
+          this.toast.show({type: 'fail', message: 'Failed deleting contact!'});
+        }
       break;
     }
   }
