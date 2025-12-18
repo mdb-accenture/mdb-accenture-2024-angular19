@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContactService } from '../../../services/contact.service';
 import { MatIconModule } from '@angular/material/icon';
 import { ContactDetailComponent } from "../../../components/contact/contact-detail/contact-detail.component";
 import { IContact } from '../../../models/contact';
+import { UiHeaderComponent } from "../../../components/ui/ui-header/ui-header.component";
 
 @Component({
   selector: 'app-ctrl-contact-details',
-  imports: [MatIconModule, ContactDetailComponent, RouterLink],
+  imports: [MatIconModule, ContactDetailComponent, UiHeaderComponent],
   templateUrl: './ctrl-contact-details.component.html',
   styleUrl: './ctrl-contact-details.component.css'
 })

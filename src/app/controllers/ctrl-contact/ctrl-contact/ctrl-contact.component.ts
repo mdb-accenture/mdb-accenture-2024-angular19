@@ -9,10 +9,11 @@ import { ContactTableComponent } from "../../../components/contact/contact-table
 import { ContactFormComponent } from "../../../components/contact/contact-form/contact-form.component";
 import { UiModalComponent } from "../../../components/ui/ui-modal/ui-modal.component";
 import { UiToastComponent } from "../../../components/ui/ui-toast/ui-toast.component";
+import { UiHeaderComponent } from "../../../components/ui/ui-header/ui-header.component";
 
 @Component({
   selector: 'app-ctrl-contact',
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, UiModalComponent, ContactCardsComponent, ContactTableComponent, ContactFormComponent, UiToastComponent],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, UiModalComponent, ContactCardsComponent, ContactTableComponent, ContactFormComponent, UiToastComponent, UiHeaderComponent],
   templateUrl: './ctrl-contact.component.html',
   styleUrl: './ctrl-contact.component.css'
 })

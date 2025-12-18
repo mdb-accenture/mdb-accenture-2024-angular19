@@ -1,10 +1,5 @@
 <!-- Header -->
-<h1 class="d-flex align-items-center">
-    <a routerLink=".." class="text-dark" mat-icon-button>
-        <mat-icon>arrow_back</mat-icon>
-    </a>
-    <span class="ms-2">Customer Information</span>
-</h1>
+<app-ui-header [backButton]="true" title="Customer Information"></app-ui-header>
 
 <!-- Content -->
 <app-contact-detail [contact]="contact"></app-contact-detail>

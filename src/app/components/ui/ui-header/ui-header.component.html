@@ -1,0 +1,11 @@
+<!-- Header -->
+<h1 class="d-flex align-items-center">
+    @if(backButton) {
+        <a routerLink=".." class="text-dark" mat-icon-button>
+            <mat-icon>arrow_back</mat-icon>
+        </a>
+    }
+    <span class="ms-2">{{title}}</span>
+</h1>
+
+<ng-content></ng-content>
