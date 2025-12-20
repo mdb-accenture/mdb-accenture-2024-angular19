@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { IContact } from '../../../models/contact';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { MaskPipe } from '../../../pipes/mask.pipe';
 
 @Component({
@@ -14,6 +14,6 @@ export class ContactFormComponent {
   @Input() contact!: IContact;
   @Output() action = new EventEmitter<string>();
 
-  onClose = () => this.action.emit('close');
+  onClose = (form: NgForm) => { this.action.emit('close'); form.reset(); };
   onSubmit = () => this.action.emit('submit');
 }

@@ -20,9 +20,9 @@
 
 <!-- View Contacts -->
 @if(cardView) {
-    <app-contact-cards [dataSource]="contacts" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-contact-cards>
+    <app-contact-cards [dataSource]="store.contacts()" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-contact-cards>
 } @else {
-    <app-contact-table [dataSource]="contacts" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-contact-table>
+    <app-contact-table [dataSource]="store.contacts()" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-contact-table>
 }
 
 <!-- Modal -->

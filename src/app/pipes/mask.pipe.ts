@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class MaskPipe implements PipeTransform {
 
   transform(value: string, mask: string): string {
-    if (!value.length) return '';
+    if (!value?.length) return '';
     value = value.replace(/\D+/g, "");
 
     let maskedValue = '';
