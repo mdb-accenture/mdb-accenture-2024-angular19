@@ -1,0 +1,10 @@
+{
+  "contacts": [
+    {
+      "id": "1",
+      "name": "Mark Bandilla",
+      "contactNumber": "0905-888-8910",
+      "emailAddress": "fake_email@gmail.com"
+    }
+  ]
+}

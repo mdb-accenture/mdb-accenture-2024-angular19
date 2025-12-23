@@ -1,18 +1,19 @@
-<div #toast style="display: none;">
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div class="toast show align-items-center border-0 shadow-none w-auto pe-3" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex align-items-center">
-                @if(action.type == "success"){
-                    <mat-icon class="px-3">check</mat-icon>
-                } 
-                @else {
-                    <mat-icon class="px-3">times</mat-icon>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    @for (toast of toastService.toasts(); track $index) {
+        <div class="toast show align-items-center border-0 shadow-none w-auto pe-3" 
+            [class.bg-success]="toast.type === action.success" 
+            [class.bg-danger]="toast.type === action.fail"
+            role="alert">
+            <div class="d-flex align-items-center text-white">
+                @if(toast.type == action.success){
+                    <mat-icon class="px-3" style="width: 40px;">check</mat-icon>
+                } @else {
+                    <mat-icon class="px-3" style="width: 40px;">cancel</mat-icon>
                 }
-
                 <div class="toast-body">
-                    {{action.message}}
+                    {{toast.message}}
                 </div>
             </div>
         </div>
-    </div>
+    }
 </div>

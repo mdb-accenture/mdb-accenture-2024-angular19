@@ -1,9 +1,15 @@
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { UiToastService } from '../../../services/ui-toast.service';
 
 export interface ToastAction {
-  type: "success" | "fail"; 
+  type: ToastActionTypes; 
   message: string;
+}
+
+export enum ToastActionTypes {
+  success = "success",
+  fail = "fail"
 }
 
 @Component({
@@ -13,14 +19,6 @@ export interface ToastAction {
   styleUrl: './ui-toast.component.css'
 })
 export class UiToastComponent {
-  @Input() timeout: number = 3000;
-  action: ToastAction = {type: 'success', message: 'Success!'};
-
-  @ViewChild('toast') toast!: ElementRef;
-
-  public show(_action: ToastAction) {
-    this.action = _action;
-    this.toast.nativeElement.style.display = "block";
-    setTimeout(() => this.toast.nativeElement.style.display = "none", this.timeout);
-  }
+  action = ToastActionTypes;
+  toastService = inject(UiToastService);
 }
