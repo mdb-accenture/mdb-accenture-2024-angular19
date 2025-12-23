@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -7,13 +7,12 @@ import { ContactCardsComponent } from "../../../components/contact/contact-cards
 import { ContactTableComponent } from "../../../components/contact/contact-table/contact-table.component";
 import { ContactFormComponent } from "../../../components/contact/contact-form/contact-form.component";
 import { UiModalComponent } from "../../../components/ui/ui-modal/ui-modal.component";
-import { UiToastComponent } from "../../../components/ui/ui-toast/ui-toast.component";
 import { UiHeaderComponent } from "../../../components/ui/ui-header/ui-header.component";
-import { ContactStore } from '../../../stores/contact.store';
+import { ContactJsonServerStore } from '../../../stores/contact-json-server.store';
 
 @Component({
   selector: 'app-ctrl-contact',
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, UiModalComponent, ContactCardsComponent, ContactTableComponent, ContactFormComponent, UiToastComponent, UiHeaderComponent],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, UiModalComponent, ContactCardsComponent, ContactTableComponent, ContactFormComponent, UiHeaderComponent],
   templateUrl: './ctrl-contact.component.html',
   styleUrl: './ctrl-contact.component.css'
 })
@@ -22,10 +21,8 @@ export class CtrlContactComponent {
   modalShow: boolean = false;
   
   contact: IContact = new Contact();
-  store = inject(ContactStore);
+  store = inject(ContactJsonServerStore);
   contacts: IContact[] = this.store.contacts();
-
-  @ViewChild(UiToastComponent) toast!: UiToastComponent;
 
   onAdd() { 
     this.contact = new Contact(); 
@@ -51,35 +48,20 @@ export class CtrlContactComponent {
         // Add Method
         if(this.contact.id === 0) {
           this.contact.id = 
-            this.store.contacts().length 
+            (this.store.contacts().length 
               ? Number(this.store.contacts()[this.store.contacts().length -1].id) + 1 
-              : 1;
-          try {
-            this.store.addContact(this.contact);
-            this.toast.show({type: 'success', message: 'Successfully added a new contact!'});
-          } catch( err ) {
-            this.toast.show({type: 'fail', message: 'Failed adding a new contact!'});
-          }
+              : 1).toString();
+          this.store.addContact(this.contact);
         }
         // Update Method
         else {
-          try {
-            this.store.updateContact(this.contact);
-            this.toast.show({type: 'success', message: 'Changes saved!'});
-          } catch( err ) {
-            this.toast.show({type: 'fail', message: 'Failed saving changes!'});
-          }
+          this.store.updateContact(this.contact);
         }
         this.modalShow = false;
       break;
       // Delete Method
       case 'delete':
-        try {
-          this.store.deleteContact(this.contact.id as number);
-          this.toast.show({type: 'success', message: 'Contact deleted!'});
-        } catch( err ) {
-          this.toast.show({type: 'fail', message: 'Failed deleting contact!'});
-        }
+        this.store.deleteContact(this.contact.id as number);
       break;
     }
   }
